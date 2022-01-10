@@ -6,16 +6,15 @@ class ListAllUsersUseCase {
 
     execute({ user_id }): User[] | Error {
         const user = this.usersRepository.findById(user_id);
+
         if (!user) {
-            throw new Error("Mensagem do erro");
+            throw new Error("Don't exist this user.");
         }
 
         if (user.admin === false) {
-            throw new Error("Mensagem do erro");
+            throw new Error("Don't exist this user.");
         }
-        const all = this.usersRepository.list();
-
-        return all;
+        return this.usersRepository.list();
     }
 }
 
